@@ -1,4 +1,4 @@
-package org.example.project.user;
+package org.example.project.user.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 

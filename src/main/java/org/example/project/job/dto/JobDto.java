@@ -1,10 +1,12 @@
-package org.example.project.job;
+package org.example.project.job.dto;
 
-import org.example.project.user.UserDto;
+import org.example.project.job.model.Job;
+import org.example.project.job.model.JobType;
+import org.example.project.user.dto.UserDto;
 
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public record JobDto(
         Integer id,
@@ -12,7 +14,7 @@ public record JobDto(
         BigDecimal budget,
         String jobTitle,
         String description,
-        LocalDate createdOn,
+        LocalDateTime createdOn,
         Integer numberOfProposal,
         String location,
         String industry,

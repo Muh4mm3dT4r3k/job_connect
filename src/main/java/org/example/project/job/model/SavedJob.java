@@ -1,11 +1,15 @@
-package org.example.project.job;
+package org.example.project.job.model;
 
 import jakarta.persistence.*;
-import org.example.project.user.User;
+import lombok.Getter;
+import lombok.Setter;
+import org.example.project.user.model.User;
 
 import java.time.LocalDateTime;
 
 @Entity(name = "saved_job")
+@Getter
+@Setter
 public class SavedJob {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "savedJob_sequence_generator")
@@ -19,35 +23,5 @@ public class SavedJob {
     private Job job;
     @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime savedAt;
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public Long getId() {
-        return id;
-    }
-
-    public User getJobSeeker() {
-        return jobSeeker;
-    }
-
-    public void setJobSeeker(User jobSeeker) {
-        this.jobSeeker = jobSeeker;
-    }
-
-    public Job getJob() {
-        return job;
-    }
-
-    public void setJob(Job job) {
-        this.job = job;
-    }
-
-    public LocalDateTime getSavedAt() {
-        return savedAt;
-    }
-
-    public void setSavedAt(LocalDateTime savedAt) {
-        this.savedAt = savedAt;
-    }
 }

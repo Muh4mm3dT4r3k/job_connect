@@ -1,11 +1,15 @@
 package org.example.project.message;
 
 import jakarta.persistence.*;
-import org.example.project.user.User;
+import lombok.Getter;
+import lombok.Setter;
+import org.example.project.user.model.User;
 
 import java.time.LocalDateTime;
 
 @Entity
+@Getter
+@Setter
 public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "message_seq_generator")

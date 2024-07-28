@@ -1,6 +1,6 @@
-package org.example.project.user;
+package org.example.project.utils;
 
-import org.springframework.stereotype.Service;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -13,17 +13,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-@Service
-public class FileStorageServiceImpl implements FileStorageService {
-    private final List<String> ALLOWED_IMAGE_TYPES = new ArrayList<>(Arrays.asList(
+
+public class FileStorageUtils {
+    private static List<String> ALLOWED_IMAGE_TYPES = new ArrayList<>(Arrays.asList(
             "image/jpeg", "image/jpg"
     ));
-    private final String ALLOWED_PDF_TYPE = "application/pdf";
+    private static final String ALLOWED_PDF_TYPE = "application/pdf";
 
 
 
-    @Override
-    public String storeFile(MultipartFile multipartFile, String fileType, String userId) {
+    
+    public static String storeFile(MultipartFile multipartFile, String fileType, String userId) {
         if (fileType.equals("photo"))
             return handlePhoto(multipartFile, userId);
         if (fileType.equals("pdf"))
@@ -31,12 +31,12 @@ public class FileStorageServiceImpl implements FileStorageService {
         return "";
     }
 
-    @Override
-    public void retrieveFile(String path) {
+    
+    public static void retrieveFile(String path) {
 
     }
 
-    private String handlePhoto(MultipartFile multipartFile, String userId){
+    private static String handlePhoto(MultipartFile multipartFile, String userId){
         if (!checkFileValidation(multipartFile.getContentType(), "photo"))
             return "";
 
@@ -44,13 +44,13 @@ public class FileStorageServiceImpl implements FileStorageService {
 
     }
 
-    private String handlePdf(MultipartFile multipartFile, String userId) {
+    private static String handlePdf(MultipartFile multipartFile, String userId) {
         if (!checkFileValidation(multipartFile.getContentType(), "pdf"))
             return "";
         return saveFile(multipartFile, "pdfs", userId);
     }
 
-    private boolean checkFileValidation(String contentType, String fileType) {
+    private static boolean checkFileValidation(String contentType, String fileType) {
         if (fileType.equals("photo"))
             return ALLOWED_IMAGE_TYPES.contains(contentType);
         else
@@ -58,7 +58,7 @@ public class FileStorageServiceImpl implements FileStorageService {
     }
 
 
-    private String saveFile(MultipartFile file, String directoryName, String userId) {
+    private static String saveFile(MultipartFile file, String directoryName, String userId) {
         String dir = "uploads/" + directoryName + "/" + userId + "/";
         Path path = Paths.get(dir).normalize();
         if (!Files.exists(path)) {

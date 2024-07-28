@@ -1,10 +1,12 @@
-package org.example.project.user;
+package org.example.project.user.repo;
 
+import org.example.project.user.model.User;
+import org.example.project.user.model.UserRole;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,7 +52,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
         FROM User u
         WHERE u.createdOn = :createdOn
     """)
-    List<User> findUserByCreatedOn(LocalDate createdOn);
+    List<User> findUserByCreatedOn(LocalDateTime createdOn);
 
     @Query("""
         SELECT u.id, u.firstName, u.lastName, u.email, u.enabled, u.role, u.createdOn
@@ -58,7 +60,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
         WHERE u.role = :role
         AND u.createdOn BETWEEN :startDate AND :endDate
     """)
-    List<User> findUserByRoleAndCreatedOnBetween(UserRole role, LocalDate startDate, LocalDate endDate);
+    List<User> findUserByRoleAndCreatedOnBetween(UserRole role, LocalDateTime startDate, LocalDateTime endDate);
 
     @Modifying
     @Query("""

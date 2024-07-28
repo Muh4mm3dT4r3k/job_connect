@@ -1,12 +1,14 @@
-package org.example.project.job;
+package org.example.project.job.repo;
 
+import org.example.project.job.model.Job;
+import org.example.project.job.model.JobStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -48,12 +50,12 @@ public interface JobRepository extends JpaRepository<Job, Integer> {
     @Query("""
         SELECT j FROM Job j WHERE j.createdOn = :createdOn
     """)
-    List<Job> findJobByCreatedOn(LocalDate createdOn);
+    List<Job> findJobByCreatedOn(LocalDateTime createdOn);
 
     @Query("""
         SELECT j FROM Job j WHERE j.createdOn BETWEEN :startDate AND :endDate
     """)
-    List<Job> findJobByCreatedOnBetween(LocalDate startDate, LocalDate endDate);
+    List<Job> findJobByCreatedOnBetween(LocalDateTime startDate, LocalDateTime endDate);
 
     @Query("""
         SELECT j FROM Job j WHERE LOWER(j.location)

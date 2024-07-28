@@ -1,8 +1,11 @@
-package org.example.project.user;
+package org.example.project.user.dto;
 
 
 
-import java.time.LocalDate;
+import org.example.project.user.model.User;
+import org.example.project.user.model.UserRole;
+
+import java.time.LocalDateTime;
 
 public record UserDto (
         Integer id,
@@ -11,7 +14,7 @@ public record UserDto (
         String email,
         UserRole role,
         boolean enabled,
-        LocalDate createOn
+        LocalDateTime createOn
 ) {
 
     public static UserDto from(User user) {
@@ -22,7 +25,7 @@ public record UserDto (
                 user.getEmail(),
                 user.getRole(),
                 user.isEnabled(),
-                user.getCreateOn()
+                user.getCreatedOn()
         );
     }
 

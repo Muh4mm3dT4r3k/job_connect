@@ -1,13 +1,16 @@
-package org.example.project.user;
+package org.example.project.user.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import org.example.project.user.model.User;
+import org.example.project.user.model.UserRole;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public record UserRegisterDto (
         @NotEmpty(message = "first name is required")
+        @Size(min = 3, message = "should be more than 3")
         String firstName,
         @NotEmpty(message = "last name is required")
         String lastName,
@@ -25,7 +28,7 @@ public record UserRegisterDto (
                 user.setFirstName(userRegisterDto.firstName);
                 user.setLastName(userRegisterDto.lastName);
                 user.setPassword(userRegisterDto.password);
-                user.setCreateOn(LocalDate.now());
+                user.setCreatedOn(LocalDateTime.now());
                 user.setRole(UserRole.jobseeker);
                 return user;
         }
